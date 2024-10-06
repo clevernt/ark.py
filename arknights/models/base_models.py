@@ -45,6 +45,7 @@ class SkillDetails(BaseModel):
 
 class OperatorDetail(BaseModel):
     id: str = Field(alias="potentialItemId")
+    name: str
     trait: str = Field(alias="description")
     description: str = Field(alias="itemUsage")
     position: str
