@@ -41,3 +41,15 @@ class SubProfession(StrEnum):
     shotprotector = "Sentinel Iron Guard"
     chainhealer = "Chain Healer"
     primcaster = "Primal Caster"
+
+
+class SPType(StrEnum):
+    INCREASE_WITH_TIME: str
+    INCREASE_WHEN_ATTACK: str
+    INCREASE_WHEN_TAKEN_DAMAGE: str
+
+
+class SkillType(StrEnum):
+    MANUAL: str
+    AUTO: str
+    PASSIVE: str

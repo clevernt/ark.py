@@ -1,7 +1,5 @@
-from typing import List, Literal, Union
 from pydantic import BaseModel, Field, field_validator
-from .enums import SubProfession
-from .types import Blackboard, UnlockCondition
+from .enums import SPType, SkillType, SubProfession
 
 __all__ = [
     "Candidate",
@@ -17,9 +15,8 @@ __all__ = [
 class Candidate(BaseModel):
     name: str
     description: str
-    # blackboard: List[Blackboard]
     potential: int = Field(alias="requiredPotentialRank")
-    unlock_condition: UnlockCondition = Field(alias="unlockCondition")
+    unlock_condition: dict[str, float] = Field(alias="unlockCondition")
 
 
 class Talent(BaseModel):
@@ -27,9 +24,7 @@ class Talent(BaseModel):
 
 
 class SPData(BaseModel):
-    sp_type: Literal[
-        "INCREASE_WITH_TIME", "INCREASE_WHEN_ATTACK", "INCREASE_WHEN_TAKEN_DAMAGE"
-    ] = Field(alias="spType")
+    sp_type: SPType = Field(alias="spType")
     sp_cost: int = Field(alias="spCost")
     initial_sp: int = Field(alias="initSp")
 
@@ -37,11 +32,11 @@ class SPData(BaseModel):
 class SkillLevel(BaseModel):
     name: str
     description: str
-    skill_type: Literal["MANUAL", "AUTO", "PASSIVE"] = Field(alias="skillType")
+    skill_type: SkillType = Field(alias="skillType")
     durationType: str
     sp_data: SPData = Field(alias="spData")
     duration: int
-    blackboard: Union[Blackboard, List[Blackboard]]
+    blackboard: dict[str, float] | list[dict[str, float]]
 
 
 class Skill(BaseModel):
@@ -50,7 +45,7 @@ class Skill(BaseModel):
 
 class SkillDetails(BaseModel):
     skill_id: str = Field(alias="skillId")
-    levels: List[SkillLevel]
+    levels: list[SkillLevel]
 
 
 class OperatorDetail(BaseModel):
@@ -59,12 +54,12 @@ class OperatorDetail(BaseModel):
     trait: str = Field(alias="description")
     description: str = Field(alias="itemUsage")
     position: str
-    tag_list: List[str] = Field(alias="tagList")
+    tag_list: list[str] = Field(alias="tagList")
     rarity: str
     profession: str
     sub_profession: str = Field(alias="subProfessionId")
-    talents: List[Talent]
-    skills: List[SkillDetails]
+    talents: list[Talent]
+    skills: list[SkillDetails]
 
     @field_validator("id")
     def strip_id(cls, v):
