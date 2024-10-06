@@ -1,5 +1,7 @@
 from enum import StrEnum
 
+__all__ = ["SubProfession"]
+
 
 class SubProfession(StrEnum):
     bearer = "Flagbearer"
