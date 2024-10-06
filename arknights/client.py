@@ -32,9 +32,7 @@ class Arknights:
         operator_info["skills"] = skill_details
         return OperatorDetail(**operator_info)
 
-    def fetch_operator(
-        self, lookup_id: str, operator_data: Dict[str, Any], skills_data: Dict[str, Any]
-    ) -> Optional[OperatorDetail]:
+    def fetch_operator(self, lookup_id: str) -> Optional[OperatorDetail]:
         """
         Fetch an operator by its ID.
 
