@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, field_validator
-from .enums import SPType, SkillType, SubProfession
+from .enums import SubProfession
 
 __all__ = [
     "Candidate",
@@ -16,7 +16,7 @@ class Candidate(BaseModel):
     name: str
     description: str
     potential: int = Field(alias="requiredPotentialRank")
-    unlock_condition: dict[str, float] = Field(alias="unlockCondition")
+    unlock_condition: dict = Field(alias="unlockCondition")
 
 
 class Talent(BaseModel):
@@ -24,7 +24,7 @@ class Talent(BaseModel):
 
 
 class SPData(BaseModel):
-    sp_type: SPType = Field(alias="spType")
+    sp_type: str = Field(alias="spType")
     sp_cost: int = Field(alias="spCost")
     initial_sp: int = Field(alias="initSp")
 
@@ -32,11 +32,11 @@ class SPData(BaseModel):
 class SkillLevel(BaseModel):
     name: str
     description: str
-    skill_type: SkillType = Field(alias="skillType")
+    skill_type: str = Field(alias="skillType")
     durationType: str
     sp_data: SPData = Field(alias="spData")
     duration: int
-    blackboard: dict[str, float] | list[dict[str, float]]
+    blackboard: list[dict]
 
 
 class Skill(BaseModel):
