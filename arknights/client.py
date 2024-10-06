@@ -1,9 +1,15 @@
+from arknights.services import data_fetcher
 from .models import OperatorDetail, SkillDetails
 from .services import fetch_operator_data, fetch_skills_data
 from typing import Dict, Any, Optional
 
 
 class Arknights:
+    def __init__(self):
+
+        self.operator_data = data_fetcher.fetch_operator_data()
+        self.skills_data = data_fetcher.fetch_skills_data()
+
     def build_operator_with_skills(
         self, operator_info: Dict[str, Any], skills_data: Dict[str, Any]
     ) -> OperatorDetail:
@@ -37,7 +43,7 @@ class Arknights:
         :param skills_data: A dictionary containing skill data.
         :return: An OperatorDetail instance or None if not found.
         """
-        operator_info = operator_data.get(lookup_id)
+        operator_info = self.operator_data.get(lookup_id)
         if operator_info:
-            return self.build_operator_with_skills(operator_info, skills_data)
+            return self.build_operator_with_skills(operator_info, self.skills_data)
         return None
