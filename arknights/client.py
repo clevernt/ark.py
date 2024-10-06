@@ -18,7 +18,7 @@ class Arknights:
 
         :param operator_info: Information about the operator.
         :param skills_data: A dictionary containing skill details.
-        :return: An OperatorDetail instance.
+        :return: An `OperatorDetail` instance.
         """
         skill_details = []
 
@@ -37,9 +37,7 @@ class Arknights:
         Fetch an operator by its ID.
 
         :param lookup_id: The ID of the operator to fetch.
-        :param operator_data: A dictionary containing operator data.
-        :param skills_data: A dictionary containing skill data.
-        :return: An OperatorDetail instance or None if not found.
+        :return: An `OperatorDetail` instance or None if not found.
         """
         operator_info = self.operator_data.get(lookup_id)
         if operator_info:
