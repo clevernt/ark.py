@@ -4,6 +4,10 @@ from .services import fetch_operator_data, fetch_skills_data
 from typing import Dict, Any, Optional
 
 
+class OperatorNotFoundError(Exception):
+    pass
+
+
 class Arknights:
     def __init__(self):
 
@@ -42,4 +46,4 @@ class Arknights:
         operator_info = self.operator_data.get(lookup_id)
         if operator_info:
             return self.build_operator_with_skills(operator_info, self.skills_data)
-        return None
+        raise OperatorNotFoundError(f"Operator with ID {lookup_id} not found.")
