@@ -1,6 +1,7 @@
 ```json
 {
     "id": "char_4100_caper",
+    "name": "Caper",
     "trait": "Can only attack while holding a <@ba.kw>boomerang projectile</> (projectile takes time to return)",
     "description": "Sniper operator Caper, always a bounce in her step.",
     "position": "RANGED",
