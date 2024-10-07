@@ -1,5 +1,5 @@
 from arknights.services import data_fetcher
-from .models import OperatorDetail, SkillDetails
+from .models import Operator, Skill
 
 __all__ = ["Arknights"]
 
@@ -16,13 +16,13 @@ class Arknights:
 
     def build_operator_with_skills(
         self, operator_info: dict[str, dict], skills_data: dict[str, any]
-    ) -> OperatorDetail:
+    ) -> Operator:
         """
-        Build an OperatorDetail instance with the associated skills.
+        Build an `Operator` instance with the associated skills.
 
         :param operator_info: Information about the operator.
         :param skills_data: A dictionary containing skill details.
-        :return: An `OperatorDetail` instance.
+        :return: An `Operator` instance.
         """
         skill_details = []
         skill_ids = (skill["skillId"] for skill in operator_info["skills"])
@@ -30,17 +30,17 @@ class Arknights:
         for skill_id in skill_ids:
             skill_info = skills_data.get(skill_id)
             if skill_info:
-                skill_details.append(SkillDetails(**skill_info))
+                skill_details.append(Skill(**skill_info))
 
         operator_info["skills"] = skill_details
-        return OperatorDetail(**operator_info)
+        return Operator(**operator_info)
 
-    def fetch_operator(self, lookup_id: str) -> OperatorDetail | None:
+    def fetch_operator(self, lookup_id: str) -> Operator | None:
         """
         Fetch an operator by its ID.
 
         :param lookup_id: The ID of the operator to fetch.
-        :return: An `OperatorDetail` instance or None if not found.
+        :return: An `Operator` instance or None if not found.
         """
         operator_info = self.operator_data.get(lookup_id)
         if operator_info:

@@ -1,9 +1,20 @@
 from enum import StrEnum
 
-__all__ = ["SubProfession"]
+__all__ = ["Class", "Branch"]
 
 
-class SubProfession(StrEnum):
+class Class(StrEnum):
+    SNIPER = "Sniper"
+    VANGUARD = "Vanguard"
+    GUARD = "Guard"
+    CASTER = "Caster"
+    SUPPORTER = "Supporter"
+    MEDIC = "Medic"
+    TANK = "Defender"
+    SPECIALIST = "Specialist"
+
+
+class Branch(StrEnum):
     bearer = "Flagbearer"
     artsfghter = "Arts Fighter"
     sword = "Swordmaster"
